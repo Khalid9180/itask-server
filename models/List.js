@@ -1,5 +1,4 @@
 const { Schema, model, default: mongoose } = require("mongoose");
-const tasks = require ("./Task")
 
 const ListSchema = new Schema({
     title: {
