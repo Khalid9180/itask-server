@@ -7,7 +7,10 @@ const ListSchema = new Schema({
     },
     tasks: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Task'
-}]
+}],
+user: {
+    type: mongoose.Schema.Types.ObjectId, ref: 'User'
+},
 },
 {timestamps: true}   
 )

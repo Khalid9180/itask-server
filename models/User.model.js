@@ -16,8 +16,12 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
+  
   tasks: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'Task'
+  }],
+  lists: [{
+    type: mongoose.Schema.Types.ObjectId, ref: 'List'
   }]
   },
   {

@@ -18,6 +18,9 @@ const TaskSchema = new Schema({
         },
         user: {
             type: mongoose.Schema.Types.ObjectId, ref:'User',
+        },
+        list: {
+            type: mongoose.Schema.Types.ObjectId, ref:'List',
         }
 },
 {timestamps: true}   

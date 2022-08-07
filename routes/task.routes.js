@@ -2,6 +2,7 @@ const router = require("express").Router();
 const express = require ("express")
 const mongoose = require("mongoose");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
+const List = require("../models/List");
 const Task = require("../models/Task");
 
 
@@ -18,8 +19,10 @@ router.post("/", isAuthenticated, (req, res) => {
 //Update a Task :
 router.post("/update/:id", isAuthenticated, (req,res) => {
     const id = req.params.id
-    const {title, description, completed, date, userId } = req.body;
-    Task.findByIdAndUpdate (id, {title, description, completed, date}, {new: true})
+    const {title, description, completed, date, list } = req.body;
+    Task.findByIdAndUpdate (id, {title, description, completed, date, list }, {new: true})
+    .then(response => 
+        {return List.findByIdAndUpdate(list, { $push: { tasks: id }})})
     .then(response => res.json(response))
     .catch(err => res.json(err))
 })
@@ -31,6 +34,17 @@ Task.findById(id)
 .then(response => res.json(response))
 .catch(err => res.json(err))
 })
+
+//Get all Tasks :
+router.get("/details/:id", isAuthenticated, (req,res) => {
+    const id = req.params.id
+Task.find({user: id})
+.then(response => res.json(response))
+.catch(err => res.json(err))
+})
+
+
+
 
 //Delete a Task :
 router.delete("/delete/:id", isAuthenticated, (req, res) => {
