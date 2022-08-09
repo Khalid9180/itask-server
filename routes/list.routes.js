@@ -22,7 +22,7 @@ router.post("/", isAuthenticated, (req, res) => {
 //Update a List :
 router.post("/update/:id", isAuthenticated, (req,res) => {
     const id = req.params.id
-    const {title} = req.body;
+    const {title, } = req.body;
     List.findByIdAndUpdate (id, {title}, {new: true})
     .then(response => res.json(response))
     .catch(err => res.json(err))

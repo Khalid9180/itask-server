@@ -36,8 +36,8 @@ Task.findById(id)
 })
 
 //Get all Tasks :
-router.get("/details/:id", isAuthenticated, (req,res) => {
-    const id = req.params.id
+router.get("/", isAuthenticated, (req,res) => {
+    const id = req.payload._id
 Task.find({user: id})
 .then(response => res.json(response))
 .catch(err => res.json(err))
